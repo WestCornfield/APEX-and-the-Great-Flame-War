@@ -1,50 +1,40 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 41, in script
-    n "Our Story begins at the Senior Living Facility Where APEX resides..."
-  File "renpy/common/000window.rpy", line 114, in _window_auto_callback
-    _window_show(auto=True)
-  File "renpy/common/000window.rpy", line 69, in _window_show
-    renpy.with_statement(trans)
-IOError: Couldn't find file 'main_theme.mp3'.
+  File "game/script.rpy", line 319, in script
+    play sound fall
+  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
+    renpy.sound.play(_audio_eval(p["file"]),
+  File "renpy/common/000statements.rpy", line 32, in _audio_eval
+    return eval(expr, locals=store.audio.__dict__)
+  File "game/script.rpy", line 319, in <module>
+    play sound fall
+NameError: name 'fall' is not defined
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 41, in script
-    n "Our Story begins at the Senior Living Facility Where APEX resides..."
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 689, in execute
-    statement_name(stmt_name)
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 46, in statement_name
-    i(name)
-  File "renpy/common/000window.rpy", line 114, in _window_auto_callback
-    _window_show(auto=True)
-  File "renpy/common/000window.rpy", line 69, in _window_show
-    renpy.with_statement(trans)
-  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1684, in with_statement
-    return renpy.game.interface.do_with(trans, paired, clear=clear)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 2762, in do_with
-    clear=clear)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 3325, in interact
-    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 4025, in interact_core
-    renpy.audio.audio.periodic()
-  File "/Applications/renpy-7.4.11-sdk/renpy/audio/audio.py", line 1162, in periodic
-    raise_(exc[0], exc[1], exc[2])
-  File "/Applications/renpy-7.4.11-sdk/renpy/audio/audio.py", line 1140, in periodic_thread_main
-    periodic_pass()
-  File "/Applications/renpy-7.4.11-sdk/renpy/audio/audio.py", line 1082, in periodic_pass
-    c.periodic()
-  File "/Applications/renpy-7.4.11-sdk/renpy/audio/audio.py", line 518, in periodic
-    topf = load(filename)
-  File "/Applications/renpy-7.4.11-sdk/renpy/audio/audio.py", line 69, in load
-    rv = renpy.loader.load(fn)
-  File "/Applications/renpy-7.4.11-sdk/renpy/loader.py", line 798, in load
-    raise IOError("Couldn't find file '%s'." % name)
-IOError: Couldn't find file 'main_theme.mp3'.
+  File "game/script.rpy", line 319, in script
+    play sound fall
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 2015, in execute
+    self.call("execute")
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 2003, in call
+    return renpy.statements.call(method, parsed, *args, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/statements.py", line 278, in call
+    return method(parsed, *args, **kwargs)
+  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
+    renpy.sound.play(_audio_eval(p["file"]),
+  File "renpy/common/000statements.rpy", line 32, in _audio_eval
+    return eval(expr, locals=store.audio.__dict__)
+  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2276, in py_eval
+    return py_eval_bytecode(code, globals, locals)
+  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
+    return eval(bytecode, globals, locals)
+  File "game/script.rpy", line 319, in <module>
+    play sound fall
+NameError: name 'fall' is not defined
 
 Darwin-18.7.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 APEX and the Great Flame War 1.0
-Sun Jan 16 16:29:26 2022
+Sat Jan 22 12:27:01 2022
