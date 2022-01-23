@@ -13,6 +13,8 @@ image archyle = "characters/Drew_Archyle.png"
 image omega = "characters/Robert_Main.png"
 image ollie = "characters/Oliver_Main.png"
 image nickles = "characters/Charlie_Nickles.png"
+image flynn = "characters/Mark_Flynn.png"
+image nkwc = "characters/NKWC.png"
 
 define narrator = Character("Narrator", color="#FFFFFF")
 define jim  = Character("Jim Caedus", color="#00BFFF")
