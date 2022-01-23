@@ -20,6 +20,42 @@ define rob = Character("Robert Main", color="#FFA500")
 define drew = Character("Drew Archyle", color="#708B8F")
 define oliver = Character("Oliver Main", color="#FF0000")
 define charlie = Character("Charlie Nickles", color="#008000")
+define flynn = Character("Mark Flynn", color="#FFA500")
+define nkwc = Character("NK", color="#C3E87D")
+
+style pokemon_who is text:
+    size 22
+    font "gui/fonts/PKMN RBYGSC.ttf"
+    color "#000000"
+
+style pokemon_what is text:
+    size 22
+    font "gui/fonts/PKMN RBYGSC.ttf"
+    color "#000000"
+
+style pokemon_window is window:
+    background Frame("gui/pokemon_background.png", 25, 25)
+    left_margin 50
+    right_margin 50
+    bottom_margin 50
+    top_padding 20
+    left_padding 20
+
+style poke_namebox_window is window:
+    background Frame("gui/pokemon_background.png")
+    xsize 250
+    ysize 50
+    xpos 90
+    ypos -10
+    top_padding 10
+    left_padding 45
+
+define poke_narrator = Character("NARRATOR", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
+define poke_jim  = Character("CAEDUS", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
+define poke_rob = Character("OMEGA", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
+define poke_drew = Character("ARCHYLE", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
+define poke_oliver = Character("OLLIE", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
+define poke_charlie = Character("NICKLES", namebox_style="poke_namebox_window", who_style="pokemon_who", what_style="pokemon_what", window_style="pokemon_window")
 
 define audio.battle = "audio/music/battle_theme.mp3"
 define audio.internet = "audio/music/internet_theme.mp3"
@@ -290,13 +326,15 @@ label start:
 
     hide caedus
 
+    $ gui.SetPreference("font", "gui/fonts/Pokemon.ttf")
+
     show caedus
     with pixellate
 
-    narrator "Trainer Caedus wants to battle!"
+    poke_narrator "Trainer Caedus wants to battle!"
 
 label choices:
-    jim "Now, Who'my gon' choose as my dang ol' second 'ginst Charlie?"
+    poke_jim "Now, Who'my gon' choose as my dang ol' second 'ginst Charlie?"
 
     menu:
         "Which APEX member shall battle Charlie Nickles?"
@@ -317,14 +355,14 @@ label choices:
             jump jim
 
 label drew:
-    jim "Take 'im out, Drew!"
+    poke_jim "Take 'im out, Drew!"
 
     hide caedus
 
     play sound toss
     play sound poof
 
-    narrator "Trainer Caedus sends out..."
+    poke_narrator "Trainer Caedus sends out..."
 
     show archyle
 
@@ -332,26 +370,26 @@ label drew:
 
     narrator "ARCHYLE!"
 
-    drew "IT'S AN HONOR TO FIGHT ALONGSIDE YOU, JIM! MY BROTHER!"
+    poke_drew "IT'S AN HONOR TO FIGHT ALONGSIDE YOU, JIM! MY BROTHER!"
 
     hide archyle
 
     show nickles
 
-    charlie "lol ur gay"
+    poke_charlie "lol ur gay"
 
     hide nickles
 
     show archyle
 
-    drew "WITNESS MY ATTACK AND TREMBLE, NICKLES!"
+    poke_drew "WITNESS MY ATTACK AND TREMBLE, NICKLES!"
 
     play sound collision
 
     show archyle
     with vpunch
 
-    narrator "ARCHYLE headbutts his phone so hard he cracks the screen."
+    poke_narrator "ARCHYLE headbutts his phone so hard he cracks the screen."
 
     play sound faint
     play sound thud
@@ -359,111 +397,111 @@ label drew:
     hide archyle
     with moveoutbottom
 
-    narrator "ARCHYLE is offline!"
+    poke_narrator "ARCHYLE is offline!"
 
     show caedus
 
-    jim "GAH DAMMIT! DREW!"
+    poke_jim "GAH DAMMIT! DREW!"
 
     jump choices
 
 label main:
-    jim "It's all you, Omega!"
+    poke_jim "It's all you, Omega!"
 
     hide caedus
 
     play sound toss
     play sound poof
 
-    narrator "Trainer Caedus sends out..."
+    poke_narrator "Trainer Caedus sends out..."
 
     show omega
 
     play sound main_cry
 
-    narrator "OMEGA!"
+    poke_narrator "OMEGA!"
 
-    narrator "OMEGA builds steam!"
+    poke_narrator "OMEGA builds steam!"
 
-    rob "The Warrior Wages War where Wars Warble."
+    poke_rob "The Warrior Wages War where Wars Warble."
 
-    rob "But Where War May Warm the Warrior, So Too The Warrior Warms War..."
-
-    hide omega
-
-    show caedus
-
-    jim "HELL YEAH! TALKINBOUT TH' HEAT! GO OFF, 'MEGA!"
-
-    hide caedus
-
-    show omega
-
-    narrator "OMEGA used Tweet!"
-
-    narrator "...But, it failed."
-
-    rob "...It won't let me post."
+    poke_rob "But Where War May Warm the Warrior, So Too The Warrior Warms War..."
 
     hide omega
 
     show caedus
 
-    jim "Wutchu mean?"
+    poke_jim "HELL YEAH! TALKINBOUT TH' HEAT! GO OFF, 'MEGA!"
 
     hide caedus
 
     show omega
 
-    rob "It says, 'Character Limit Exceeded'."
+    poke_narrator "OMEGA used Tweet!"
+
+    poke_narrator "...But, it failed."
+
+    poke_rob "...It won't let me post."
+
+    hide omega
+
+    show caedus
+
+    poke_jim "Wutchu mean?"
+
+    hide caedus
+
+    show omega
+
+    poke_rob "It says, 'Character Limit Exceeded'."
 
     hide omega
 
     show nickles
 
-    charlie "you fukin suk lol"
+    poke_charlie "you fukin suk lol"
 
     hide nickles
 
     show omega
 
-    rob "***@@RobertTHEOMEGA1 has blocked you on Twitter***"
+    poke_rob "***@@RobertTHEOMEGA1 has blocked you on Twitter***"
 
     hide omega
     with dissolve
 
     play sound run
 
-    narrator "OMEGA is offline!"
+    poke_narrator "OMEGA is offline!"
 
     show caedus
 
-    jim "GAH DAMMIT!"
+    poke_jim "GAH DAMMIT!"
 
     jump choices
 
 label ollie:
 
-    jim "Go for it, Ollie!"
+    poke_jim "Go for it, Ollie!"
 
     hide caedus
 
     play sound toss
     play sound poof
 
-    narrator "Trainer Caedus sends out...!"
+    poke_narrator "Trainer Caedus sends out...!"
 
     show ollie
 
     play sound ollie_cry
 
-    narrator "OLLIE!"
+    poke_narrator "OLLIE!"
 
-    oliver "And I'm Oll- *cough*!"
+    poke_oliver "And I'm Oll- *cough*!"
 
-    oliver "I'm Oll- *cough* *wheeze*!"
+    poke_oliver "I'm Oll- *cough* *wheeze*!"
 
-    narrator "Ollie passed out, choking on his own spit!"
+    poke_narrator "Ollie passed out, choking on his own spit!"
 
     play sound faint
     play sound thud
@@ -471,25 +509,150 @@ label ollie:
     hide ollie
     with moveoutbottom
 
-    narrator "Ollie is offline!"
+    poke_narrator "Ollie is offline!"
 
     show nickles
 
-    charlie "lol wow"
+    poke_charlie "lol wow"
 
     hide nickles
 
     show caedus
 
-    jim "Fer fuck's sake, Ollie!"
+    poke_jim "Fer fuck's sake, Ollie!"
 
     jump choices
 
 label jim:
-    jim "I GUESS IT'S UP T' ME NOW!"
+    poke_jim "I GUESS IT'S UP T' ME NOW!"
 
-    jim "BOYS, LEND ME YOUR STRENGTH!"
+    poke_jim "BOYS, LEND ME YOUR STRENGTH!"
+
+    poke_drew "WE'RE WITH YOU, JIM, MY BROTHER!"
+
+    poke_ollie "And I'm Ollie!"
+
+    "..."
+
+    "..."
+
+    poke_jim "Okay, well two outta three ain' b-"
+
+    poke_rob "Sorry, I know it's close to deadline, but yeah, me too."
+
+    poke_jim "OKAY GREAT! WITH APEX'S FULL STRENGTH, I CAN'T LOSE!"
+
+    poke_narrator "CAEDUS prepares a special attack!"
+
+    poke_jim "'SOVER FER YOU!"
+
+    poke_charlie "1v1 me m8"
+
+    poke_jim "NOTCHU, NICKLES!"
+
+    poke_jim "I'M TALKING TO COREY SMITH!"
+
+    "..."
+
+    poke_charlie "corey's afk, bruh"
+
+    poke_jim "PERPARE TAH MEETCHUR MAKER, COREY!"
+
+    poke_narrator "CAEDUS unleashes his attack!"
+
+    poke_jim "TWEEEEEEEEET STOOOOOOOOOOOOOORM"
+
+    poke_narrator "CAEDUS drops one reply!"
+
+    poke_narrator "Two replies!"
+
+    poke_narrator "Five replies!"
+
+    poke_jim "TALKINBOUT EVEN FURTHER BEYOOOOOOOOOOOOOND!"
+
+    poke_narrator "TEN REPLIES!"
+
+    poke_narrator "TWENTY REPLIES!"
+
+    poke_narrator "FIFTY REPLIES!"
+
+    poke_jim "DANGOL WITNESS MY UNLIMITED POWER!"
+
+    jump ending
 
     # This ends the game.
+
+label ending:
+    narrator "Meanwhile, back in the real world."
+
+    narrator "*knock knock*"
+
+    narrator "*door opens*"
+
+    nkwc "Annyeonghaseyo, APEX!"
+
+    flynn "FYI: Y'all's door is unlocked."
+
+    flynn "If you're not more careful, someone might just slip in here and take your stu-"
+
+    flynn "...Whoa."
+
+    drew "*bleeding, face covered in glass shards, with a bricked phone embedded in his skull*"
+
+    rob "ZZZZZzzzzzzzz ZZZZZZZZZZzzzzzzzzzzzz"
+
+    ollie "*looking at the ceiling, drowning in his own saliva, like a turkey in the rain*"
+
+    jim "Razza frazza, dangol... *furiously posting on the internet*"
+
+    nkwc "...What happened here?"
+
+    nkwc "Was APEX attacked Mark Flynn?"
+
+    flynn "...No. I think this was... largely self-inflicted."
+
+    nkwc "My word."
+
+    flynn "..."
+
+    nkwc "..."
+
+    flynn "Hey, Jim?"
+
+    jim "Razza frazza, dangol'... Talkinbout #shutyerface..."
+
+    flynn "It looks like you left the tag belts in this fishbowl with your keys."
+
+    flynn "...Mind if we...?"
+
+    jim "Dangol, gonna kick yer ass in real life, ya simp..."
+
+    flynn "I'll take that as a yes. Much obliged."
+
+    nkwc "Gamsa haeyo, Jim Caedus!"
+
+    nkwc "We hope one day you return to your former glory and..."
+
+    nkwc "Um..."
+
+    nkwc "Stop doing this."
+
+    jim "Dangol, I'll show y'all I ain't tah be trifled with..."
+
+    jim "*post sound effect*"
+
+    jim "haha, got 'im"
+
+    narrator "*door closes*"
+
+    nkwc "This message has been brought to you by Wrestlers Against the Internet."
+
+    flynn "The Internet."
+
+    flynn "NOT."
+
+    flynn "EVEN."
+
+    flynn "ONCE."
 
     return

@@ -747,6 +747,11 @@ screen preferences():
 
                 ## Additional vboxes of type "radio_pref" or "check_pref" can be
                 ## added here, to add additional creator-defined preferences.
+                vbox:
+                    style_prefix "check"
+                    label _("Font")
+                    textbutton _("Default") action gui.SetPreference("font", "DejaVuSans.ttf")
+                    textbutton _("Pokemon") action  gui.SetPreference("font", "fonts/Pokemon.ttf")
 
             null height (4 * gui.pref_spacing)
 

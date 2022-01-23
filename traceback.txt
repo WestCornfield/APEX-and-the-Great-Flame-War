@@ -1,40 +1,36 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 319, in script
-    play sound fall
-  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
-    renpy.sound.play(_audio_eval(p["file"]),
-  File "renpy/common/000statements.rpy", line 32, in _audio_eval
-    return eval(expr, locals=store.audio.__dict__)
-  File "game/script.rpy", line 319, in <module>
-    play sound fall
-NameError: name 'fall' is not defined
+  File "game/script.rpy", line 100, in script
+    poke_narrator "APEX! One of the greatest factions in XWF History!"
+Exception: Unknown keyword arguments: namebox_style
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 319, in script
-    play sound fall
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 2015, in execute
-    self.call("execute")
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 2003, in call
-    return renpy.statements.call(method, parsed, *args, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/statements.py", line 278, in call
-    return method(parsed, *args, **kwargs)
-  File "renpy/common/000statements.rpy", line 300, in execute_play_sound
-    renpy.sound.play(_audio_eval(p["file"]),
-  File "renpy/common/000statements.rpy", line 32, in _audio_eval
-    return eval(expr, locals=store.audio.__dict__)
-  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2276, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "/Applications/renpy-7.4.11-sdk/renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 319, in <module>
-    play sound fall
-NameError: name 'fall' is not defined
+  File "game/script.rpy", line 100, in script
+    poke_narrator "APEX! One of the greatest factions in XWF History!"
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
+    who(what, *args, **kwargs)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
+    **display_args)
+  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 602, in display_say
+    what_text = renpy.display.screen.get_widget(what_text[0], what_text[1], what_text[2])
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 1322, in get_displayable
+    screen.update()
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 637, in update
+    self.screen.function(**self.scope)
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 159, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 146, in apply
+    raise Exception("Unknown keyword arguments: %s" % (", ".join(list(values.keys()))))
+Exception: Unknown keyword arguments: namebox_style
 
 Darwin-18.7.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 APEX and the Great Flame War 1.0
-Sat Jan 22 12:27:01 2022
+Sat Jan 22 20:26:59 2022
