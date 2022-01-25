@@ -8,13 +8,26 @@ image outsideRoom = "bg/Apartment_Exterior.png"
 image insideRoom = "bg/Futon_Room.png"
 image digitalWorld = "bg/Digital_World.jpeg"
 
-image caedus = "characters/Jim_Caedus.png"
-image archyle = "characters/Drew_Archyle.png"
-image omega = "characters/Robert_Main.png"
-image ollie = "characters/Oliver_Main.png"
-image nickles = "characters/Charlie_Nickles.png"
-image flynn = "characters/Mark_Flynn.png"
-image nkwc = "characters/NKWC.png"
+image caedus = "characters/caedus/Jim_Caedus.png"
+image caedus surprised = "characters/caedus/Jim_Caedus_surprised.png"
+
+image archyle = "characters/archyle/Drew_Archyle.png"
+image archyle ghost = "characters/archyle/Drew_Archyle_ghost.png"
+
+image omega = "characters/omega/Robert_Main.png"
+image omega ghost = "characters/omega/Robert_Main_ghost.png"
+
+image ollie = "characters/ollie/Oliver_Main.png"
+image ollie ghost = "characters/ollie/Oliver_Main_ghost.png"
+
+image nickles = "characters/nickles/Charlie_Nickles.png"
+image flynn = "characters/flynn/Mark_Flynn.png"
+image nkwc = "characters/nkwc/NKWC.png"
+
+image internet = "end_screens/The Internet.jpeg"
+image internet_not = "end_screens/The Internet_N.jpeg"
+image internet_even = "end_screens/The Internet_NE.jpeg"
+image internet_once = "end_screens/The Internet_NEO.jpeg"
 
 define narrator = Character("Narrator", color="#FFFFFF")
 define jim  = Character("Jim Caedus", color="#00BFFF")
@@ -45,7 +58,7 @@ style pokemon_window is window:
 
 style poke_namebox_window is window:
     background Frame("gui/pokemon_background.png")
-    xsize 250
+    xsize 280
     ysize 50
     xpos 90
     ypos -10
@@ -63,6 +76,7 @@ define audio.battle = "audio/music/battle_theme.mp3"
 define audio.internet = "audio/music/internet_theme.mp3"
 define audio.main = "audio/music/main_theme.mp3"
 define audio.spotted = "audio/music/spotted_theme.mp3"
+define audio.flynn = "audio/music/flynn_theme.mp3"
 
 define audio.drew_cry = "audio/sounds/Drew_Cry.mp3"
 define audio.jim_cry = "audio/sounds/Jim_Cry.mp3"
@@ -78,10 +92,73 @@ define audio.toss = "audio/sounds/Toss.wav"
 
 define audio.run = "audio/sounds/Run.wav"
 
+define audio.hammer = "audio/sounds/Hammer.mp3"
+
+define audio.earthquake = "audio/sounds/Earthquake.mp3"
+
 define sent_main = False
 define sent_drew = False
 define sent_ollie = False
 
+init:
+
+    python:
+
+        import math
+
+        class Shaker(object):
+
+            anchors = {
+                'top' : 0.0,
+                'center' : 0.5,
+                'bottom' : 1.0,
+                'left' : 0.0,
+                'right' : 1.0,
+                }
+
+            def __init__(self, start, child, dist):
+                if start is None:
+                    start = child.get_placement()
+                #
+                self.start = [ self.anchors.get(i, i) for i in start ]  # central position
+                self.dist = dist    # maximum distance, in pixels, from the starting point
+                self.child = child
+
+            def __call__(self, t, sizes):
+                # Float to integer... turns floating point numbers to
+                # integers.
+                def fti(x, r):
+                    if x is None:
+                        x = 0
+                    if isinstance(x, float):
+                        return int(x * r)
+                    else:
+                        return x
+
+                xpos, ypos, xanchor, yanchor = [ fti(a, b) for a, b in zip(self.start, sizes) ]
+
+                xpos = xpos - xanchor
+                ypos = ypos - yanchor
+
+                nx = xpos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+                ny = ypos + (1.0-t) * self.dist * (renpy.random.random()*2-1)
+
+                return (int(nx), int(ny), 0, 0)
+
+        def _Shake(start, time, child=None, dist=100.0, **properties):
+
+            move = Shaker(start, child, dist=dist)
+
+            return renpy.display.layout.Motion(move,
+                          time,
+                          child,
+                          add_sizes=True,
+                          **properties)
+
+        Shake = renpy.curry(_Shake)
+    #
+
+#
 # The game starts here.
 
 label start:
@@ -211,9 +288,13 @@ label start:
 
     hide archyle
 
-    show caedus
+    show caedus surprised
 
     jim "..."
+
+    hide caedus surprised
+
+    show caedus
 
     jim "Nah, not the dang ol' ring! Why'd we settle anythin' in the ring, Drew?"
 
@@ -328,8 +409,6 @@ label start:
 
     hide caedus
 
-    $ gui.SetPreference("font", "gui/fonts/Pokemon.ttf")
-
     show caedus
     with pixellate
 
@@ -339,7 +418,7 @@ label choices:
     poke_jim "Now, Who'my gon' choose as my dang ol' second 'ginst Charlie?"
 
     menu:
-        "Which APEX member shall battle Charlie Nickles?"
+        poke_narrator "Choose an APEX member."
 
         "M'Boy, Main" if not sent_main:
             $ sent_main = True
@@ -370,7 +449,7 @@ label drew:
 
     play sound drew_cry
 
-    narrator "ARCHYLE!"
+    poke_narrator "ARCHYLE!"
 
     poke_drew "IT'S AN HONOR TO FIGHT ALONGSIDE YOU, JIM! MY BROTHER!"
 
@@ -378,7 +457,7 @@ label drew:
 
     show nickles
 
-    poke_charlie "lol ur gay"
+    poke_charlie "lol nice pirate costume bruh"
 
     hide nickles
 
@@ -423,7 +502,7 @@ label main:
 
     poke_narrator "OMEGA!"
 
-    poke_narrator "OMEGA builds steam!"
+    poke_narrator "OMEGA started typing!"
 
     poke_rob "The Warrior Wages War where Wars Warble."
 
@@ -438,6 +517,8 @@ label main:
     hide caedus
 
     show omega
+
+    poke_narrator "OMEGA finished typing!"
 
     poke_narrator "OMEGA used Tweet!"
 
@@ -467,7 +548,7 @@ label main:
 
     show omega
 
-    poke_rob "***@@RobertTHEOMEGA1 has blocked you on Twitter***"
+    poke_rob "(RobertTHEOMEGA1 has blocked you on Twitter)"
 
     hide omega
     with dissolve
@@ -499,9 +580,9 @@ label ollie:
 
     poke_narrator "OLLIE!"
 
-    poke_oliver "And I'm Oll- *cough*!"
+    poke_oliver "And I'm Oll- (cough)!"
 
-    poke_oliver "I'm Oll- *cough* *wheeze*!"
+    poke_oliver "I'm Oll- (cough) (wheeze)!"
 
     poke_narrator "Ollie passed out, choking on his own spit!"
 
@@ -526,72 +607,196 @@ label ollie:
     jump choices
 
 label jim:
+    show caedus
+
     poke_jim "I GUESS IT'S UP T' ME NOW!"
 
     poke_jim "BOYS, LEND ME YOUR STRENGTH!"
 
+    poke_jim "Dangol, power of friendship, talkinbout that dangol heart o' the cards, tellyouwhut"
+
+    hide caedus
+
+    show archyle ghost
+    with dissolve
+
     poke_drew "WE'RE WITH YOU, JIM, MY BROTHER!"
 
-    poke_ollie "And I'm Ollie!"
+    hide archyle ghost
 
-    "..."
+    show omega ghost
+    with dissolve
 
-    "..."
+    poke_rob "Support supports even when support cannot sup on port."
 
-    poke_jim "Okay, well two outta three ain' b-"
+    hide omega ghost
 
-    poke_rob "Sorry, I know it's close to deadline, but yeah, me too."
+    show ollie ghost
+    with dissolve
 
-    poke_jim "OKAY GREAT! WITH APEX'S FULL STRENGTH, I CAN'T LOSE!"
+    poke_oliver "And I'm Ollie's Ghost!"
+
+    hide ollie ghost
+
+    show caedus
+
+    poke_jim "DANGOL HELL YEAH TELLYOUWHUT! WITH APEX'S FULL STRENGTH, I CAN'T LOSE!"
+
+    hide caedus
 
     poke_narrator "CAEDUS prepares a special attack!"
 
+    show caedus
+    with Shake((0, 0, 0, 0), 0.5, dist=5)
+
+    play sound earthquake volume 0.25
+
     poke_jim "'SOVER FER YOU!"
 
+    hide caedus
+
+    show nickles
+
     poke_charlie "1v1 me m8"
+
+    poke_charlie "ill fukin destroy u"
+
+    hide nickles
+
+    show caedus
 
     poke_jim "NOTCHU, NICKLES!"
 
     poke_jim "I'M TALKING TO COREY SMITH!"
 
-    "..."
+    hide caedus
 
-    poke_charlie "corey's afk, bruh"
+    poke_narrator "..."
+
+    show caedus
+
+    poke_jim "OH YEAH?!?"
+
+    hide caedus
+
+    poke_narrator "......"
+
+    show nickles
+
+    poke_charlie "corey's ain here, bruh"
+
+    hide nickles
+
+    show caedus
+
+    poke_jim "I'M FINNA SHUTCHU UP, COREY!"
+
+    hide caedus
+
+    show nickles
+
+    poke_charlie "lol wtf"
+
+    hide nickles
+
+    show caedus
 
     poke_jim "PERPARE TAH MEETCHUR MAKER, COREY!"
+    with Shake((0, 0, 0, 0), 1.0, dist=10)
+
+    play sound earthquake volume 0.5
+
+    hide caedus
 
     poke_narrator "CAEDUS unleashes his attack!"
 
-    poke_jim "TWEEEEEEEEET STOOOOOOOOOOOOOORM"
+    show caedus
 
-    poke_narrator "CAEDUS drops one reply!"
+    poke_jim "MEEEEEEEEELTDOOOOOOOOOOOOOOOWN"
 
-    poke_narrator "Two replies!"
+    hide caedus
 
-    poke_narrator "Five replies!"
+    with Shake((0, 0, 0, 0), 3.0, dist=15)
+    play sound earthquake volume 0.75
 
-    poke_jim "TALKINBOUT EVEN FURTHER BEYOOOOOOOOOOOOOND!"
+    poke_narrator "CAEDUS begins having a....!"
 
-    poke_narrator "TEN REPLIES!"
+    poke_narrator "NUCLEAR!"
 
-    poke_narrator "TWENTY REPLIES!"
+    poke_narrator "GRADE!"
 
-    poke_narrator "FIFTY REPLIES!"
+    poke_narrator "MELTDOWN!"
 
-    poke_jim "DANGOL WITNESS MY UNLIMITED POWER!"
+    show caedus
+
+    poke_jim "TALKINBOUT..."
+
+    poke_jim "EVEN"
+
+    poke_jim "FURTHER"
+
+    poke_jim "BEYOOOOOOOOOOOOOND!"
+
+    hide caedus
+    with Shake((0, 0, 0, 0), 3.0, dist=15)
+    play sound earthquake volume 1.0
+
+    poke_narrator "THE ENTIRE INTERNET BECOMES DRENCHED IN WASTE!"
+
+    poke_narrator "THE SERVERS ARE ON FIRE!"
+
+    poke_narrator "AL GORE WEEPS AS HIS INVENTION IS DESTROYED!"
+
+    show caedus
+
+    poke_jim "UNLIMITED POWEEEEEEEEEEEEEEER"
+
+    hide caedus
 
     jump ending
 
     # This ends the game.
 
 label ending:
+    stop music
+
+    stop sound
+
+    scene outsideRoom
+
     narrator "Meanwhile, back in the real world."
 
     narrator "*knock knock*"
 
     narrator "*door opens*"
 
+    play music flynn
+
+    scene insideRoom
+
+    show nkwc
+
     nkwc "Annyeonghaseyo, APEX!"
+
+    nkwc "It is I, North Korean War Criminal!"
+
+    nkwc "Your mortal enemy and  best friend!"
+
+    hide nkwc
+
+    show flynn
+
+    flynn "*cough*"
+
+    hide flynn
+
+    show nkwc
+
+    nkwc "Ah yes... And I brought along Mark Flynn."
+
+    hide nkwc
+
+    show flynn
 
     flynn "FYI: Y'all's door is unlocked."
 
@@ -599,37 +804,99 @@ label ending:
 
     flynn "...Whoa."
 
+    hide flynn
+
+    show archyle
+
     drew "*bleeding, face covered in glass shards, with a bricked phone embedded in his skull*"
+
+    hide archyle
+
+    show omega
 
     rob "ZZZZZzzzzzzzz ZZZZZZZZZZzzzzzzzzzzzz"
 
-    ollie "*looking at the ceiling, drowning in his own saliva, like a turkey in the rain*"
+    hide omega
+
+    show ollie
+
+    oliver "*looking at the ceiling, drowning in his own saliva, like a turkey in a rainstorm*"
+
+    hide ollie
+
+    show caedus
 
     jim "Razza frazza, dangol... *furiously posting on the internet*"
 
+    hide caedus
+
+    show nkwc
+
     nkwc "...What happened here?"
 
-    nkwc "Was APEX attacked Mark Flynn?"
+    nkwc "Was APEX attacked, Mark Flynn?"
 
-    flynn "...No. I think this was... largely self-inflicted."
+    hide nkwc
 
-    nkwc "My word."
+    show flynn
+
+    flynn "...No. Pretty sure this was... LARGELY self-inflicted."
+
+    hide flynn
+
+    show nkwc
+
+    nkwc "Goodness gracious."
+
+    hide nkwc
+
+    show flynn
 
     flynn "..."
 
+    hide flynn
+
+    show nkwc
+
     nkwc "..."
+
+    hide nkwc
+
+    show flynn
 
     flynn "Hey, Jim?"
 
+    hide flynn
+
+    show caedus
+
     jim "Razza frazza, dangol'... Talkinbout #shutyerface..."
 
-    flynn "It looks like you left the tag belts in this fishbowl with your keys."
+    hide caedus
+
+    show flynn
+
+    flynn "It looks like you left the tag belts in this... fishbowl with y'all's keys?"
 
     flynn "...Mind if we...?"
 
-    jim "Dangol, gonna kick yer ass in real life, ya simp..."
+    hide flynn
 
-    flynn "I'll take that as a yes. Much obliged."
+    show caedus
+
+    jim "Dangol, gonna kick yer ass up 'n down this message board..."
+
+    hide caedus
+
+    show flynn
+
+    flynn "I'll take that as a yes."
+
+    flynn "Much obliged."
+
+    hide flynn
+
+    show nkwc
 
     nkwc "Gamsa haeyo, Jim Caedus!"
 
@@ -639,21 +906,91 @@ label ending:
 
     nkwc "Stop doing this."
 
+    hide nkwc
+
+    show caedus
+
     jim "Dangol, I'll show y'all I ain't tah be trifled with..."
 
     jim "*post sound effect*"
 
     jim "haha, got 'im"
 
+    hide caedus
+
     narrator "*door closes*"
+
+    scene outsideRoom
+
+    show nkwc
+
+    nkwc "Mark Flynn?"
+
+    hide nkwc
+
+    show flynn
+
+    flynn "Yeah, NK?"
+
+    hide flynn
+
+    show nkwc
+
+    nkwc "Do you hypothesize Jim Caedus will be angry when he realizes we've taken our belts back?"
+
+    hide nkwc
+
+    show flynn
+
+    flynn "Oh yeah, he'll be good 'n pissed."
+
+    flynn "But, I figure he won't find out right away."
+
+    flynn "We have until people start being polite on the internet..."
+
+    flynn "Or until Jimbo realizes he can just block people he doesn't like."
+
+    hide flynn
+
+    show nkwc
+
+    nkwc "So... Either way..."
+
+    nkwc "Never?"
+
+    hide nkwc
+
+    show flynn
+
+    flynn "Haha, yeah."
+
+    hide flynn
+
+    show nkwc
 
     nkwc "This message has been brought to you by Wrestlers Against the Internet."
 
+    hide nkwc
+
+    scene internet
+
     flynn "The Internet."
+
+    scene internet_not
+
+    play sound hammer
 
     flynn "NOT."
 
+    scene internet_even
+
+    play sound hammer
+
     flynn "EVEN."
+
+    scene internet_once
+
+    play sound hammer
 
     flynn "ONCE."
 

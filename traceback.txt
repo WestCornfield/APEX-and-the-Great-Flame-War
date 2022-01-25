@@ -1,36 +1,30 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 100, in script
-    poke_narrator "APEX! One of the greatest factions in XWF History!"
-Exception: Unknown keyword arguments: namebox_style
+  File "game/script.rpy", line 628, in script
+    show ollie ghost
+Exception: Image 'ollie' does not accept attributes 'ghost'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 100, in script
-    poke_narrator "APEX! One of the greatest factions in XWF History!"
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 721, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 1419, in say
-    who(what, *args, **kwargs)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 1249, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 901, in do_display
-    **display_args)
-  File "/Applications/renpy-7.4.11-sdk/renpy/character.py", line 602, in display_say
-    what_text = renpy.display.screen.get_widget(what_text[0], what_text[1], what_text[2])
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 1322, in get_displayable
-    screen.update()
-  File "/Applications/renpy-7.4.11-sdk/renpy/display/screen.py", line 637, in update
-    self.screen.function(**self.scope)
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 159, in apply_arguments
-    return parameters.apply(args, kwargs, ignore_errors)
-  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 146, in apply
-    raise Exception("Unknown keyword arguments: %s" % (", ".join(list(values.keys()))))
-Exception: Unknown keyword arguments: namebox_style
+  File "game/script.rpy", line 628, in script
+    show ollie ghost
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 1197, in execute
+    show_imspec(self.imspec, atl=getattr(self, "atl", None))
+  File "/Applications/renpy-7.4.11-sdk/renpy/ast.py", line 1167, in show_imspec
+    atl=atl)
+  File "/Applications/renpy-7.4.11-sdk/renpy/exports.py", line 742, in show
+    if not base.find_target() and renpy.config.missing_show:
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/image.py", line 409, in find_target
+    self.target = target._duplicate(a)
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 390, in _duplicate
+    args.extraneous()
+  File "/Applications/renpy-7.4.11-sdk/renpy/display/core.py", line 271, in extraneous
+    " ".join(self.args),
+Exception: Image 'ollie' does not accept attributes 'ghost'.
 
 Darwin-18.7.0-x86_64-i386-64bit
 Ren'Py 7.4.11.2266
 APEX and the Great Flame War 1.0
-Sat Jan 22 20:26:59 2022
+Mon Jan 24 18:14:24 2022
