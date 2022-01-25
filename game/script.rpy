@@ -802,6 +802,8 @@ label ending:
 
     flynn "If you're not more careful, someone might just slip in here and take your stu-"
 
+    flynn "..."
+
     flynn "...Whoa."
 
     hide flynn
