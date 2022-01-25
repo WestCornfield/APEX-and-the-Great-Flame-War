@@ -14,6 +14,7 @@
 
 define config.name = _("APEX and the Great Flame War")
 
+define build.itch_project = "westcornfield/apex-and-the-great-flame-war"
 
 ## Determines if the title given above is shown on the main menu screen. Set
 ## this to False to hide the title.

@@ -176,7 +176,7 @@ label start:
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    narrator "Our Story begins at the Senior Living Facility that APEX calls home..."
+    narrator "Our Story begins at the Headquarters of..."
 
     scene outsideRoom
     with dissolve
@@ -185,7 +185,7 @@ label start:
 
     narrator "However! They now face their greatest challenge of all!"
 
-    narrator "Internet Trolls!"
+    narrator "Are they up to the challenge...?"
 
     scene insideRoom
     with dissolve
@@ -194,7 +194,7 @@ label start:
 
     # These display lines of dialogue.
 
-    jim "Dagnabbit, Dang ol' Trolls!"
+    jim "Dagnabbit, Dang ol' !"
 
     hide caedus
 
@@ -202,11 +202,13 @@ label start:
 
     drew "JIM! BROTHER!"
 
+    drew "PLEASE LOWER THE VOLUME OF YOUR CANTANKEROUS MUTTERING!"
+
     drew "I JUST GOT ROBERT TO TAKE A NAP!"
 
     drew "YOU KNOW HE NEEDS EIGHTEEN HOURS OF SLEEP THESE DAYS!"
 
-    drew "OTHERWISE HE GETS ALL CRANKY!"
+    drew "OTHERWISE HE GETS ALL FUSSY!"
 
     hide archyle
 
@@ -222,7 +224,7 @@ label start:
 
     show archyle
 
-    drew "AWWW HE'S CUTTING A PROMO IN HIS SLEEP!"
+    drew "AWWW LOOK JIM! ROBERT IS CUTTING A PROMO IN HIS SLEEP!"
 
     drew "AND IT SOUNDS LIKE HIS BEST ONE IN WEEKS!"
 
@@ -246,7 +248,9 @@ label start:
 
     show archyle
 
-    drew "YOU ALWAYS KNEW JUST WHAT TO SAY TO WHIP THIS CREW INTO SHAPE, jim !"
+    drew "YOU ALWAYS KNEW JUST WHAT TO SAY TO WHIP THIS CREW INTO SHAPE, JIM!"
+
+    drew "WE ALL ADMIRE YOU AND THERE'S NO TRUTH TO THE RUMOR THAT YOU'RE SECRETLY 5 FOOT 4 INCHES IN HEIGHT!"
 
     hide archyle
 
@@ -256,11 +260,13 @@ label start:
 
     rob "Dreaming a dream where dreams may dream to dream..."
 
+    rob "Zzzzzzzzzzzzzzzz"
+
     hide omega
 
     show archyle
 
-    drew "YOU STILL GOT IT, MAIN!"
+    drew "YOU'VE STILL GOT IT, ROBERT!"
 
     hide archyle
 
@@ -274,7 +280,7 @@ label start:
 
     jim "Then, it's dang ol' settled, man."
 
-    jim "Talkingbout, we're done being flamed 'n ambushed 'n trolled by the damn..."
+    jim "Talkingbout, we're done being attacked 'n ambushed 'n bamboozled by the damn..."
 
     jim "Dang ol' peanut gallery."
 
@@ -336,6 +342,8 @@ label start:
 
     jim "To the dang ol' internet, knowwutImean!"
 
+    jim "Grab your dangol' phones!"
+
     hide caedus
 
     show digitalWorld
@@ -353,7 +361,7 @@ label start:
 
     show archyle
 
-    drew "BUY PILLS FOR ERECTICLE DYSFUNCTION?"
+    drew "BUY PILLS FOR ERECTICLE DYSFUNCTION???"
 
     hide archyle
 
@@ -463,6 +471,8 @@ label drew:
 
     show archyle
 
+    poke_drew "YOUR INSOLENCE WILL BE YOUR DOWNFALL!"
+
     poke_drew "WITNESS MY ATTACK AND TREMBLE, NICKLES!"
 
     play sound collision
@@ -502,6 +512,10 @@ label main:
 
     poke_narrator "OMEGA!"
 
+    poke_rob "Prepare yourself for annihilation..."
+
+    poke_charlie "no u"
+
     poke_narrator "OMEGA started typing!"
 
     poke_rob "The Warrior Wages War where Wars Warble."
@@ -512,7 +526,7 @@ label main:
 
     show caedus
 
-    poke_jim "HELL YEAH! TALKINBOUT TH' HEAT! GO OFF, 'MEGA!"
+    poke_jim "HELL YEAH! TALKINBOUT BRINGIN' TH' HEAT! GO OFF, 'MEGA!"
 
     hide caedus
 
@@ -523,6 +537,16 @@ label main:
     poke_narrator "OMEGA used Tweet!"
 
     poke_narrator "...But, it failed."
+
+    hide omega
+
+    show caedus
+
+    poke_jim "WUT HAPPENED, 'MEGA?!? Did Charlie hack ya?"
+
+    hide caedus
+
+    show omega
 
     poke_rob "...It won't let me post."
 
@@ -565,7 +589,7 @@ label main:
 
 label ollie:
 
-    poke_jim "Go for it, Ollie!"
+    poke_jim "Go fer it, Ollie!"
 
     hide caedus
 
@@ -673,17 +697,25 @@ label jim:
 
     poke_narrator "..."
 
+    poke_narrator "......"
+
     show caedus
 
     poke_jim "OH YEAH?!?"
 
     hide caedus
 
-    poke_narrator "......"
+    poke_narrator "........."
+
+    show caedus
+
+    poke_jim "TOUGH TALK, HUH, SMITH?!?"
+
+    hide caedus
 
     show nickles
 
-    poke_charlie "corey's ain here, bruh"
+    poke_charlie "corey ain even here, bruh"
 
     hide nickles
 
@@ -741,21 +773,22 @@ label jim:
     with Shake((0, 0, 0, 0), 3.0, dist=15)
     play sound earthquake volume 1.0
 
-    poke_narrator "THE ENTIRE INTERNET BECOMES DRENCHED IN WASTE!"
+    poke_narrator "THE ENTIRE INTERNET BECOMES DRENCHED IN TOXIC WASTE!"
 
-    poke_narrator "THE SERVERS ARE ON FIRE!"
+    poke_narrator "SERVERS ACROSS THE GLOBE BURST INTO FLAME!"
 
-    poke_narrator "AL GORE WEEPS AS HIS INVENTION IS DESTROYED!"
+    poke_narrator "AL GORE WEEPS AS HIS INVENTION IS UTTERLY ANNIHILATED!"
 
     show caedus
+    with Shake((0, 0, 0, 0), 3.0, dist=30)
 
-    poke_jim "UNLIMITED POWEEEEEEEEEEEEEEER"
+    poke_jim "UNLIMITED..."
+
+    poke_jim "POWEEEEEEEEEEEEEEEEEEEEEEEEEEEER!"
 
     hide caedus
 
     jump ending
-
-    # This ends the game.
 
 label ending:
     stop music
@@ -780,13 +813,13 @@ label ending:
 
     nkwc "It is I, North Korean War Criminal!"
 
-    nkwc "Your mortal enemy and  best friend!"
+    nkwc "Your mortal enemy and also best friend!"
 
     hide nkwc
 
     show flynn
 
-    flynn "*cough*"
+    flynn "*cough cough*"
 
     hide flynn
 
@@ -822,13 +855,13 @@ label ending:
 
     show ollie
 
-    oliver "*looking at the ceiling, drowning in his own saliva, like a turkey in a rainstorm*"
+    oliver "*drowning in his own bubbling saliva, looking up like a turkey in a rainstorm*"
 
     hide ollie
 
     show caedus
 
-    jim "Razza frazza, dangol... *furiously posting on the internet*"
+    jim "Razza frazza, dangol... *furiously typing into his phone*"
 
     hide caedus
 
@@ -842,7 +875,9 @@ label ending:
 
     show flynn
 
-    flynn "...No. Pretty sure this was... LARGELY self-inflicted."
+    flynn "...No. Pretty sure this was..."
+
+    flynn "LARGELY self-inflicted."
 
     hide flynn
 
@@ -866,7 +901,7 @@ label ending:
 
     show flynn
 
-    flynn "Hey, Jim?"
+    flynn "Hey... Jim?"
 
     hide flynn
 
@@ -880,7 +915,7 @@ label ending:
 
     flynn "It looks like you left the tag belts in this... fishbowl with y'all's keys?"
 
-    flynn "...Mind if we...?"
+    flynn "...Mind if we... uh...?"
 
     hide flynn
 
@@ -892,7 +927,7 @@ label ending:
 
     show flynn
 
-    flynn "I'll take that as a yes."
+    flynn "I'll take that as a Yes."
 
     flynn "Much obliged."
 
@@ -914,7 +949,7 @@ label ending:
 
     jim "Dangol, I'll show y'all I ain't tah be trifled with..."
 
-    jim "*post sound effect*"
+    jim "*post sound*"
 
     jim "haha, got 'im"
 
@@ -944,7 +979,7 @@ label ending:
 
     show flynn
 
-    flynn "Oh yeah, he'll be good 'n pissed."
+    flynn "Oh yeah, he'll be good 'n pissed off."
 
     flynn "But, I figure he won't find out right away."
 
